@@ -16,7 +16,8 @@ app.use(bodyParser.urlencoded({
     extended: true
 }));
 
-module.exports = require('./utils/notification');
+//module.exports = require('./utils/notification');
+module.exports = require('./utils/fcmnotification');
 
 /* Routing */
 app.get('/', function (req, res) {
@@ -78,6 +79,15 @@ app.post('/registerToken', function (req, res) {
     dbCon.tokens.insert(json, function (err, docs) {
         res.send('Add new' + docs.token + ' Completed')
     })
+});
+
+app.get('/token/:id', function (req, res) {
+    var id = parseInt(req.params.id);
+
+    dbCon.tokens.findOne({id: id}, function(err, docs) {
+        res.json(docs);
+    });
+
 });
 
 /* สั่งให้ server ทำการรัน Web Server ด้วย port ที่เรากำหนด */
