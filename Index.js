@@ -95,3 +95,5 @@ app.listen(port, function() {
     console.log('Starting node.js on port ' + port);
 });
 
+module.exports = app;
+
